@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-	<h3>Nova Categoria</h3>
+	<h3>Editar Categoria: {{$category->name}}</h3>
 	<br>
 	
 	<br>
@@ -14,7 +14,7 @@
 		@endforeach
 		</ul>
 	@endif
-	{!! Form::open(['route'=>'admin.categories.store', 'class'=>'form'])!!}
+	{!! Form::model($category, ['route'=>['admin.categories.update', $category->id]])!!}
 
 	 <div class="form-group">
 	 	{!! Form::label('Name','Nome:')!!}
@@ -22,7 +22,7 @@
 	 </div>
 
 	 <div class="form-group">
-	 	{!! Form::submit('Criar Categoria', ['class'=>'btn btn-primary'])!!}
+	 	{!! Form::submit('Salvar Categoria', ['class'=>'btn btn-primary'])!!}
 	 </div>
 
 	{!! Form::close()!!}
