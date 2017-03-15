@@ -17,7 +17,7 @@ class User extends Model implements Transformable,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {
-    use TransformableTrait, Authenticatable, Authorizable, CanResetPassword;;
+    use TransformableTrait, Authenticatable, Authorizable, CanResetPassword;
 
     public function client()
     {
