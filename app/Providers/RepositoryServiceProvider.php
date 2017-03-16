@@ -22,5 +22,13 @@ class RepositoryServiceProvider extends ServiceProvider
             'Delivery\Repositories\ProductRepository',
             'Delivery\Repositories\ProductRepositoryEloquent'
         );
+        $this->app->bind(
+            'Delivery\Repositories\ClientRepository',
+            'Delivery\Repositories\ClientRepositoryEloquent'
+        );
+        $this->app->bind(
+            'Delivery\Repositories\UserRepository',
+            'Delivery\Repositories\UserRepositoryEloquent'
+        );
     }
 }

@@ -21,7 +21,8 @@ class Client extends Model implements Transformable
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
+        //significa q vai se relacionar c id da tabeka client e com user_id
     }
 
 }
