@@ -11,11 +11,16 @@ class Order extends Model implements Transformable
     use TransformableTrait;
 
      protected $fillable = [
-    	'cliente_id',
+    	'client_id',
     	'user_deliveryman_id',
     	'total',
     	'status',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     public function items()
     {
@@ -24,7 +29,8 @@ class Order extends Model implements Transformable
 
     public function deliveryman()
     {
-    	return $this->belongsTo(User::class);
+    	return $this->belongsTo(User::class, 'user_deliveryman_id', 'id');
+        //informa que o user_deliveryman_id faz referencia ao id da tabela User
     }
 
     public function products()

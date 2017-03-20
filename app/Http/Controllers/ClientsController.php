@@ -27,7 +27,6 @@ class ClientsController extends Controller
 
     $this->clientService = $clientService;
   }
-
   public function index()
   {
     $clients = $this->clientRepository->paginate(5);
@@ -44,7 +43,7 @@ class ClientsController extends Controller
 
   public function store(AdminClientRequest $adminClientRequest)
   {
-    $this->clientService->create($adminClientRequest->all());
+    $this->clientRepository->create($adminClientRequest->all());
 
     return redirect()->route('admin.clients.index');
   }

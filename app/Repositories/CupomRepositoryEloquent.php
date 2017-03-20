@@ -4,15 +4,15 @@ namespace Delivery\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Delivery\Repositories\UserRepository;
-use Delivery\Models\User;
-use Delivery\Validators\UserValidator;
+use Delivery\Repositories\CupomRepository;
+use Delivery\Models\Cupom;
+use Delivery\Validators\CupomValidator;
 
 /**
- * Class UserRepositoryEloquent
+ * Class CupomRepositoryEloquent
  * @package namespace Delivery\Repositories;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+class CupomRepositoryEloquent extends BaseRepository implements CupomRepository
 {
     /**
      * Specify Model class name
@@ -21,14 +21,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function model()
     {
-        return User::class;
+        return Cupom::class;
     }
 
-    public function getDeliverymen()
-    {
-        return $this->model->where(['role'=>'deliveryman'])->lists('name', 'id');
-        //metodo criado para trazer somente os deliverymen
-    }
+    
 
     /**
      * Boot up the repository, pushing criteria

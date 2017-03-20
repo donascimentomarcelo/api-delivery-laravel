@@ -35,5 +35,9 @@ Route::get('products/edit/{id}',['as' => 'products.edit', 'uses' => 'ProductsCon
 Route::post('products/update/{id}',['as' => 'products.update', 'uses' => 'ProductsController@update']);
 Route::get('products/destroy/{id}',['as' => 'products.delete', 'uses' => 'ProductsController@destroy']);
 Route::post('products/store',['as' => 'products.store', 'uses' => 'ProductsController@store']);
+
+Route::get('orders',['as' => 'orders.index', 'uses' => 'OrdersController@index']);
+Route::get('orders/{id}',['as' => 'orders.edit', 'uses' => 'OrdersController@edit']);
+Route::post('orders/update/{id}',['as' => 'orders.update', 'uses' => 'OrdersController@update']);
 });
 
