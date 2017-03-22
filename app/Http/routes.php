@@ -53,3 +53,32 @@ Route::group(['prefix'=>'customer', 'middleware'=>'auth.checkrole:client', 'as'=
 	Route::get('order/create', ['as'=>'order.create', 'uses'=>'CheckoutController@create']);
 	Route::post('order/store', ['as'=>'order.store', 'uses'=>'CheckoutController@store']);
 });
+
+Route::post('oauth/access_token', function() {
+    return Response::json(Authorizer::issueAccessToken());
+});
+
+Route::group(['prefix'=>'api', 'middleware'=>'oauth', 'as'=>'api.'],function(){
+	
+	Route::group(['prefix'=>'client', 'middleware'=>'oauth.checkrole:client', 'as'=>'client.'],function(){
+		Route::get('pedidos', function(){
+			return[
+				'id'=> 1,
+				'client'=> 'Luiz Carlos client',
+				'total'=> 10
+			];
+		});
+	});
+	
+	Route::group(['prefix'=>'deliveryman', 'middleware'=>'oauth.checkrole:deliveryman', 'as'=>'deliveryman.'],function(){
+		Route::get('pedidos', function(){
+			return[
+				'id'=> 1,
+				'client'=> 'Luiz Carlos deliveryman',
+				'total'=> 10
+			];
+		});
+		
+	});
+	
+});
