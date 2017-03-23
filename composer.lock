@@ -303,7 +303,7 @@
                 }
             ],
             "abandoned": "laravelcollective/html",
-            "time": "2015-01-01T16:31:18+00:00"
+            "time": "2015-01-01 16:31:18"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -635,12 +635,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "dc4baa2b10e62257ed36491279d2fc85bf9f6ad8"
+                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/dc4baa2b10e62257ed36491279d2fc85bf9f6ad8",
-                "reference": "dc4baa2b10e62257ed36491279d2fc85bf9f6ad8",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
+                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
                 "shasum": ""
             },
             "require": {
@@ -710,7 +710,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-03-19T10:52:15+00:00"
+            "time": "2017-03-22T15:43:14+00:00"
         },
         {
             "name": "league/oauth2-server",
@@ -1731,12 +1731,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "d45f940f3b55a0c99eae8482c726be264ad1c8dc"
+                "reference": "742db411c556b5e974812f6e414afa4b70aacd9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/d45f940f3b55a0c99eae8482c726be264ad1c8dc",
-                "reference": "d45f940f3b55a0c99eae8482c726be264ad1c8dc",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/742db411c556b5e974812f6e414afa4b70aacd9a",
+                "reference": "742db411c556b5e974812f6e414afa4b70aacd9a",
                 "shasum": ""
             },
             "require": {
@@ -1779,7 +1779,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-04T10:53:31+00:00"
+            "time": "2017-03-22T20:27:23+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -2386,12 +2386,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "c6d2e74fc23f5b8c004a74c011d297976ee41dc5"
+                "reference": "489dec479a089af0beaaa54b255d507ec34b21e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/c6d2e74fc23f5b8c004a74c011d297976ee41dc5",
-                "reference": "c6d2e74fc23f5b8c004a74c011d297976ee41dc5",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/489dec479a089af0beaaa54b255d507ec34b21e3",
+                "reference": "489dec479a089af0beaaa54b255d507ec34b21e3",
                 "shasum": ""
             },
             "require": {
@@ -2399,7 +2399,7 @@
             },
             "require-dev": {
                 "ext-intl": "*",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "~4.0||~5.0",
                 "squizlabs/php_codesniffer": "~1.5"
             },
             "type": "library",
@@ -2428,7 +2428,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-03-17T17:56:19+00:00"
+            "time": "2017-03-22T22:23:34+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -3625,12 +3625,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "7b3437d363f41231ca5e351984cda5e8178f6ff6"
+                "reference": "76ae7f27e17ab4e5e177d8f9aa6c116d56fe47df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/7b3437d363f41231ca5e351984cda5e8178f6ff6",
-                "reference": "7b3437d363f41231ca5e351984cda5e8178f6ff6",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/76ae7f27e17ab4e5e177d8f9aa6c116d56fe47df",
+                "reference": "76ae7f27e17ab4e5e177d8f9aa6c116d56fe47df",
                 "shasum": ""
             },
             "require": {
@@ -3672,7 +3672,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-22T10:47:48+00:00"
+            "time": "2017-03-22T19:08:11+00:00"
         },
         {
             "name": "webmozart/assert",
