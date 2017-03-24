@@ -17,6 +17,11 @@ class Order extends Model implements Transformable
     	'status',
     ];
 
+    public function cupom()
+    {
+        return $this->belongsTo(Cupom::class);
+    }
+    
     public function client()
     {
         return $this->belongsTo(Client::class);

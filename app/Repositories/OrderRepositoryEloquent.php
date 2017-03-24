@@ -2,11 +2,12 @@
 
 namespace Delivery\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Delivery\Repositories\OrderRepository;
 use Delivery\Models\Order;
+use Delivery\Repositories\OrderRepository;
 use Delivery\Validators\OrderValidator;
+use Illuminate\Database\Eloquent\Collection;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class OrderRepositoryEloquent
@@ -14,6 +15,22 @@ use Delivery\Validators\OrderValidator;
  */
 class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 {
+    public function getByDeliveryman($id, $idDeliveryman)
+    {
+        $result = $this->with(['client','items','cupom'])->findWhere([
+            'id'=>$id,
+            'user_deliveryman_id'=>$idDeliveryman
+            ]);
+        if($result instanceof Collection){
+            //faço esse if pq o resultado do findwhere é uma coleção
+            $result = $result->first();
+            $result->items->each(function($item){
+                $item->product;
+            });
+        }
+
+        return $result;
+    }
     /**
      * Specify Model class name
      *

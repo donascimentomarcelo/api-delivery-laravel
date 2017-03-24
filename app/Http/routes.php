@@ -62,19 +62,14 @@ Route::group(['prefix'=>'api', 'middleware'=>'oauth', 'as'=>'api.'],function(){
 	
 	Route::group(['prefix'=>'client', 'middleware'=>'oauth.checkrole:client', 'as'=>'client.'],function(){
 		
-		Route::resource('order','uses'=>'Api\Client\ClientCheckoutController',['except' => ['create','edit','destroy']]);
+		Route::resource('order','Api\Client\ClientCheckoutController',['except' => ['create','edit','destroy']]);
         
 	});
 	
 	Route::group(['prefix'=>'deliveryman', 'middleware'=>'oauth.checkrole:deliveryman', 'as'=>'deliveryman.'],function(){
-		Route::get('pedidos', function(){
-			return[
-				'id'=> 1,
-				'client'=> 'Luiz Carlos deliveryman',
-				'total'=> 10
-			];
-		});
 		
+		Route::resource('order','Api\Deliveryman\DeliverymanCheckoutController',['except' => ['create','edit','destroy','store']]);
+
 	});
 	
 });
