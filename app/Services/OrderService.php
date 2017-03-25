@@ -73,4 +73,17 @@ class OrderService
 			
 		}
 	}
+
+	public function updateStatus($id, $idDeliveryman)
+	{
+		 $order = $this->orderRepository->getByDeliveryman($id, $idDeliveryman);
+		 if ($order instanceof Order) 
+		 	//se $ordem for uma instancia de Ordem
+		 {
+		 	$order->status = $status;
+		 	$order->save();
+		 	return $order;
+		 }
+		 return false;
+	}
 }

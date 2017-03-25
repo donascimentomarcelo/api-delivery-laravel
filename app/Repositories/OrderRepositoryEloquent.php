@@ -24,9 +24,12 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         if($result instanceof Collection){
             //faço esse if pq o resultado do findwhere é uma coleção
             $result = $result->first();
-            $result->items->each(function($item){
-                $item->product;
-            });
+            if($result)
+            { 
+                $result->items->each(function($item){
+                    $item->product;
+                });
+            }
         }
 
         return $result;
