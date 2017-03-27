@@ -5,11 +5,12 @@ namespace Delivery\Http\Controllers\Api\Client;
 use Delivery\Http\Controllers\Api\Client;
 use Delivery\Http\Controllers\Controller;
 use Delivery\Http\Requests;
+use Illuminate\Http\Request;
+use Delivery\Http\Requests\CheckoutRequest;
 use Delivery\Repositories\OrderRepository;
 use Delivery\Repositories\ProductRepository;
 use Delivery\Repositories\UserRepository;
 use Delivery\Services\OrderService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
@@ -40,7 +41,7 @@ class ClientCheckoutController extends Controller
         return $orders;
     }
 
-    public function store(Request $request)
+    public function store(CheckoutRequest $request)
     {
         $data = $request->all();
         $id = Authorizer::getResourceOwnerId();

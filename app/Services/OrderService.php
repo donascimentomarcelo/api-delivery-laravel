@@ -2,6 +2,7 @@
 
 namespace Delivery\Services;
 
+use Delivery\Models\Order;
 use Delivery\Repositories\CupomRepository;
 use Delivery\Repositories\OrderRepository;
 use Delivery\Repositories\ProductRepository;
@@ -74,7 +75,7 @@ class OrderService
 		}
 	}
 
-	public function updateStatus($id, $idDeliveryman)
+	public function updateStatus($id, $idDeliveryman, $status)
 	{
 		 $order = $this->orderRepository->getByDeliveryman($id, $idDeliveryman);
 		 if ($order instanceof Order) 
