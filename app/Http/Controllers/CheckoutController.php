@@ -3,7 +3,7 @@
 namespace Delivery\Http\Controllers;
 
 use Delivery\Http\Controllers\Controller;
-use Delivery\Http\Requests;
+use Delivery\Http\Requests\CheckoutRequest;
 use Delivery\Repositories\OrderRepository;
 use Delivery\Repositories\ProductRepository;
 use Delivery\Repositories\UserRepository;
@@ -44,7 +44,7 @@ class CheckoutController extends Controller
         return view('customer.order.create', compact('products'));
     }
 
-    public function store(Request $request)
+    public function store(CheckoutRequest $request)
     {
         $data = $request->all();
         // dd($data);

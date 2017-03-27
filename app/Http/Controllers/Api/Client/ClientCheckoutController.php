@@ -55,10 +55,10 @@ class ClientCheckoutController extends Controller
     public function show($id)
     {
         $o = $this->orderRepository->with(['client','items','cupom'])->find($id);
-        $o->items->each(function($item){
+        /*$o->items->each(function($item){
             //nesse caso o item será uma coleção do laravel vindo da model order
             $item->product;
-        });
+        });*/
         return $o;
     }
 }

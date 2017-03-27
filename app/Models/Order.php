@@ -17,6 +17,14 @@ class Order extends Model implements Transformable
     	'status',
     ];
 
+    public function transform()
+    {
+        return [
+            'order'=>$this->id,
+            'items'=>$this->items
+        ];
+    }
+
     public function cupom()
     {
         return $this->belongsTo(Cupom::class);

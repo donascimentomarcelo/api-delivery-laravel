@@ -2,7 +2,7 @@
 
 namespace Delivery\Http\Requests;
 
-use Delivery\Http\Requests\Request as HttpRequest;
+use Illuminate\Http\Request as HttpRequest;
 
 class CheckoutRequest extends Request
 {
@@ -36,7 +36,7 @@ class CheckoutRequest extends Request
 
         foreach ($items as $key => $value) 
         {
-            $this->buildRulesItems($key, $rules)            
+            $this->buildRulesItems($key, $rules);            
         }
 
         return $rules;
