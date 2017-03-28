@@ -15,6 +15,9 @@ use Prettus\Repository\Eloquent\BaseRepository;
  */
 class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 {
+
+    protected $skipPresenter = true;
+
     public function getByDeliveryman($id, $idDeliveryman)
     {
         $result = $this->with(['client','items','cupom'])->findWhere([
@@ -56,6 +59,6 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 
     public function presenter()
     {
-        return \Prettus\Repository\Presenter\ModelFractalPresenter::class;
+        return \Delivery\Presenters\OrderPresenter::class;
     }
 }
