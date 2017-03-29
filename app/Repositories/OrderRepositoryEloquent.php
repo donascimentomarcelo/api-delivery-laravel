@@ -24,14 +24,30 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
             'id'=>$id,
             'user_deliveryman_id'=>$idDeliveryman
             ]);
-        if($result instanceof Collection){
+        if($result instanceof Collection)
+        {
             //faço esse if pq o resultado do findwhere é uma coleção
             $result = $result->first();
-            if($result)
-            { 
-                $result->items->each(function($item){
-                    $item->product;
-                });
+            // if($result)
+            // { 
+            //     $result->items->each(function($item){
+            //         $item->product;
+            //     });
+            // }
+        }
+        else
+        {
+            //se não for uma instancia da collection (instanceof Collection), sera um array. Aqui verifico se ha algo dentro do result[data], se houver eu retiro o [] para que a serealização seja apenas de objetos json
+            if(isset($result['data']) && count($result['data']) == 1)
+            {
+                $result = [
+                    'data' => $result['data'][0]
+                ];
+            }
+            else
+            {
+                throw new ModelNotFoundException("Order não existe.");
+                
             }
         }
 

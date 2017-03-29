@@ -22,6 +22,7 @@ class OrderItemTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
+            'product_id' => (int) $model->product_id,
 
             /* place your other model properties here */
 
