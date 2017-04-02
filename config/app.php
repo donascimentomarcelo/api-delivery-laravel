@@ -153,6 +153,8 @@ return [
         Delivery\Providers\RouteServiceProvider::class,
         Delivery\Providers\RepositoryServiceProvider::class,
 
+        Barryvdh\Cors\ServiceProvider::class,
+
     ],
 
     /*

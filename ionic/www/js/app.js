@@ -3,8 +3,16 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', ['ionic','angular-oauth2'])
 
+var appCtrl = angular.module('starter.controller', []);
+
+var appService = angular.module('starter.services', []);
+
+var app = angular.module('starter', ['ionic', 'starter.controller', 'angular-oauth2', 'ngResource'])
+
+.constant('appConfig', {
+  baseUrl:'http://localhost:8000'
+})
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -23,7 +31,7 @@ var app = angular.module('starter', ['ionic','angular-oauth2'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider){
+.config(function($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, appConfig){
    
    OAuthTokenProvider.configure({
     name: 'token',
@@ -33,9 +41,11 @@ var app = angular.module('starter', ['ionic','angular-oauth2'])
   });
 
    OAuthProvider.configure({
-      baseUrl: 'https://localhost:8000',
+      baseUrl: appConfig.baseUrl,
+      // colocar https qnd tiver em producao
       clientId: 'appid01',
-      clientSecret: 'secret' // optional
+      clientSecret: 'secret', // optional
+      grantPath:'/oauth/access_token'
   });
 
   $stateProvider
@@ -43,6 +53,31 @@ var app = angular.module('starter', ['ionic','angular-oauth2'])
     url: '/login',
     templateUrl:'templates/login.html',
     controller:'LoginCtrl'
+  })
+  .state('home',{
+    url: '/home',
+    templateUrl:'templates/home.html',
+    controller:'LoginCtrl'
+  })
+  .state('client',{
+    abstract:true,
+    url: '/client',
+    template:'<ui-view/>'
+  })
+  .state('client.checkout',{
+    url: '/checkout',
+    templateUrl:'templates/client/checkout.html',
+    controller:'ClientCheckoutCtrl'
+  })
+  .state('client.checkout_item_detail',{
+    url: '/checkout/detail/:index',
+    templateUrl:'templates/client/checkout_item_detail.html',
+    controller:'ClientCheckoutDetailCtrl'
+  })
+  .state('client.view_products',{
+    url: '/view_products',
+    templateUrl:'templates/client/view_products.html',
+    controller:'ClientViewProductCtrl'
   })
 
   // $urlRouterProvider.otherwise('/');
