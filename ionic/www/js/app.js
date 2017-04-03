@@ -8,7 +8,7 @@ var appCtrl = angular.module('starter.controller', []);
 
 var appService = angular.module('starter.services', []);
 
-var app = angular.module('starter', ['ionic', 'starter.controller', 'angular-oauth2', 'ngResource'])
+var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.services', 'angular-oauth2', 'ngResource'])
 
 .constant('appConfig', {
   baseUrl:'http://localhost:8000'
@@ -62,7 +62,7 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'angular-oau
   .state('client',{
     abstract:true,
     url: '/client',
-    template:'<ui-view/>'
+    template:'<ion-nav-view/>'
   })
   .state('client.checkout',{
     url: '/checkout',
@@ -81,4 +81,7 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'angular-oau
   })
 
   // $urlRouterProvider.otherwise('/');
+})
+.service('cart', function(){
+  this.items = [];
 });
