@@ -1,7 +1,13 @@
 appCtrl.controller('ClientCheckoutCtrl', [
-	'$scope', '$state', '$cart', 'orderAPIService', '$ionicLoading', '$ionicPopup',
-		 function($scope, $state, $cart, orderAPIService, $ionicLoading, $ionicPopup){
+	'$scope', '$state', '$cart', 'orderAPIService', '$ionicLoading', '$ionicPopup', 'cupomAPIService',
+		 function($scope, $state, $cart, orderAPIService, $ionicLoading, $ionicPopup, cupomAPIService){
 			 
+			 cupomAPIService.get({code:7731},function(data){
+			 	$cart.setCupom(data.data.code, data.data.value);
+			 	console.log($cart.getTotalFinal());
+			 },function(responseError){
+			 	console.log(responseError);
+			 });
 			 var cart = $cart.get();
 			 
 			 $scope.items = cart.items;

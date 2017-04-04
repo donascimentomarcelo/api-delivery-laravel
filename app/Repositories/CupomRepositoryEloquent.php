@@ -2,11 +2,13 @@
 
 namespace Delivery\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Delivery\Repositories\CupomRepository;
 use Delivery\Models\Cupom;
+use Delivery\Presenters\CupomPresenter;
+use Delivery\Repositories\CupomRepository;
 use Delivery\Validators\CupomValidator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class CupomRepositoryEloquent
@@ -14,6 +16,7 @@ use Delivery\Validators\CupomValidator;
  */
 class CupomRepositoryEloquent extends BaseRepository implements CupomRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
@@ -32,5 +35,23 @@ class CupomRepositoryEloquent extends BaseRepository implements CupomRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return CupomPresenter::class;
+    }
+
+    public function findByCode($code)
+    {
+        $result = $this->model->where('code', $code)->where('used', 0)->first();
+        if($result)
+        {
+            return $this->parserResult($result);
+            // parserResult verifica se trab c presenter ou n, ai retorna um array de dados ou uma instancia do eloquent
+        }
+
+        throw (new ModelNotFoundException)->setModel(get_class($this->model));
+        
     }
 }

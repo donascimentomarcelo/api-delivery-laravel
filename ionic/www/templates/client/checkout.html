@@ -6,12 +6,12 @@
 
 			<h2 class="title">Total: R$  {{total}}</h2>
 
-			<button class="button button-clear button-icon ion-trash-b" ng-click="showDelete = !showDelete"></button>
+			<button class="button button-clear button-icon ion-trash-b" ng-click="showDelete = !showDelete" ></button>
 
 		</div>
 		<ion-content class="padding has-subheader">
 			<ion-list show-delete="showDelete">
-				<ion-item ng-repeat="o in items" ng-click="openProductDetail($index)">
+				<ion-item ng-repeat="o in items as results" ng-click="openProductDetail($index)">
 					<h2>{{o.name}}</h2>
 					<div class="row">
 						<div class="col">
@@ -26,6 +26,6 @@
 					<ion-delete-button class="ion ion-minus-circled" ng-click="removeIndex($index)"></ion-delete-button>
 				</ion-item>
 			</ion-list>
-			<button type="button" class="button button-assertive button-full" ng-click="save()">Fazer Pedido</button>
+			<button type="button" class="button button-assertive button-full" ng-click="save()" ng-if="results.length > 0">Fazer Pedido</button>
 		</ion-content>
 </ion-view>
