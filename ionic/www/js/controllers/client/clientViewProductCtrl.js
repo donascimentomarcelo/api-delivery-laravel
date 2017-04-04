@@ -2,11 +2,6 @@ appCtrl.controller('ClientViewProductCtrl', [
 	'$scope', '$state', 'Product', '$ionicLoading', '$cart', 
 		 function($scope, $state, Product, $ionicLoading, $cart){
 		 	
-		 	$localStorage.setObject('cart',{
-		 		name:'ionic',
-		 		version:'1.1.1'
-		 	});
-
 		 	$scope.products = [];
 		 	
 		 	$ionicLoading.show({
