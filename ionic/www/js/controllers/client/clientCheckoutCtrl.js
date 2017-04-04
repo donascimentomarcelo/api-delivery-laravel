@@ -1,7 +1,7 @@
 appCtrl.controller('ClientCheckoutCtrl', [
-	'$scope', '$state', 'cart', '$localStorage',
-		 function($scope, $state, cart, $localStorage){
-	
-		 $scope.items = cart.items;
-		 console.log($localStorage.getObject('cart'));
+	'$scope', '$state', '$cart',
+		 function($scope, $state, $cart){
+			 var cart = $cart.get();
+			 $scope.items = cart.items;
+			 $scope.total = cart.total;
 }]);

@@ -1,6 +1,6 @@
 appCtrl.controller('ClientViewProductCtrl', [
-	'$scope', '$state', 'Product', '$ionicLoading', 'cart', '$localStorage',
-		 function($scope, $state, Product, $ionicLoading, cart, $localStorage){
+	'$scope', '$state', 'Product', '$ionicLoading', '$cart', 
+		 function($scope, $state, Product, $ionicLoading, $cart){
 		 	
 		 	$localStorage.setObject('cart',{
 		 		name:'ionic',
@@ -21,7 +21,10 @@ appCtrl.controller('ClientViewProductCtrl', [
 		 	});
 
 		 	$scope.addItem = function(item){
-		 		cart.items.push(item);
+		 		// cart.items.push(item);
+		 		// $state.go('client.checkout');
+		 		item.qtd = 1;
+		 		$cart.addItem(item);
 		 		$state.go('client.checkout');
 		 	};
     
