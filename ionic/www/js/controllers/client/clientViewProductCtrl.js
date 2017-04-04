@@ -5,7 +5,11 @@ appCtrl.controller('ClientViewProductCtrl', [
 		 	$scope.products = [];
 		 	
 		 	$ionicLoading.show({
-		 		template:'Carregando...'
+		 		content: 'Loading',
+			    animation: 'fade-in',
+			    showBackdrop: true,
+			    maxWidth: 200,
+			    showDelay: 0
 		 	});
 		 	
 		 	Product.query({}, function(data){

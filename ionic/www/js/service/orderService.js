@@ -1,4 +1,4 @@
-appService.factory('Order',
+appService.factory('orderAPIService',
 	 ['$resource', 'appConfig',
 		function ($resource, appConfig) {
 
@@ -8,4 +8,4 @@ appService.factory('Order',
 			 		}
 			 	});
 
-}])
+}]);

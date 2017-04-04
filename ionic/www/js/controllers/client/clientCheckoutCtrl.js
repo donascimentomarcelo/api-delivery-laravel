@@ -1,6 +1,6 @@
 appCtrl.controller('ClientCheckoutCtrl', [
-	'$scope', '$state', '$cart', 'Order', '$ionicLoading', '$ionicPopup',
-		 function($scope, $state, $cart, Order, $ionicLoading, $ionicPopup){
+	'$scope', '$state', '$cart', 'orderAPIService', '$ionicLoading', '$ionicPopup',
+		 function($scope, $state, $cart, orderAPIService, $ionicLoading, $ionicPopup){
 			 
 			 var cart = $cart.get();
 			 
@@ -27,10 +27,17 @@ appCtrl.controller('ClientCheckoutCtrl', [
 		    		item.product_id = item.id;
 		    	});
 		    	$ionicLoading.show({
-		    		template: 'Carregando...'
+		    		// template: 'Carregando...'
+		    		content: 'Loading',
+				    animation: 'fade-in',
+				    showBackdrop: true,
+				    maxWidth: 200,
+				    showDelay: 0
 		    	});
-		    	Order.save({id:null},{items:items}, function(){
+		    	
+		    	orderAPIService.save({id:null},{items:items}, function(data){
 		    		$ionicLoading.hide();
+		    		$state.go('client.checkout_successful');
 		    	},function(responseError){
 		    		$ionicLoading.hide();
 		    		$ionicPopup.alert({
