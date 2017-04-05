@@ -76,6 +76,7 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
     controller:'ClientCheckoutDetailCtrl'
   })
   .state('client.checkout_successful',{
+    cache:false,
     url:'/checkout/successful',
     templateUrl:'templates/client/checkout_successful.html',
     controller: 'ClientCheckoutSuccessfulCtrl'
@@ -86,7 +87,7 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
     controller:'ClientViewProductCtrl'
   })
 
-  // $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/login');
 })
 .service('cart', function(){
   this.items = [];
