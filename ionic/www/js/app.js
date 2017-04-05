@@ -31,7 +31,7 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, appConfig){
+.config(function($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, appConfig, $provide){
    
    OAuthTokenProvider.configure({
     name: 'token',
@@ -88,6 +88,37 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
   })
 
   $urlRouterProvider.otherwise('/login');
+
+  $provide.decorator('OAuthToken',['$localStorage', '$delegate' ,function($localStorage, $delegate){
+    Object.defineProperties($delegate,{
+      setToken:{
+        value: function(data){
+          return $localStorage.setObject('token', data);
+        },
+        enumerable: true,
+        configurable: true,
+        writable: true
+      }, 
+      getToken:{
+        value: function(){
+          return $localStorage.getObject('token');
+        },
+        enumerable: true,
+        configurable: true,
+        writable: true
+      }, 
+      removeToken:{
+        value: function(){
+           return $localStorage.setObject('token', null);
+        },
+        enumerable: true,
+        configurable: true,
+        writable: true
+      }
+    });
+    return $delegate;
+    // essa config sobrescreve o OAuthToken no provide
+  }]);
 })
 .service('cart', function(){
   this.items = [];

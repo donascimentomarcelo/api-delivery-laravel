@@ -17,7 +17,7 @@ appCtrl.controller('LoginCtrl', [
                   });
       	OAuth.getAccessToken($scope.user).then(function(data){
                   $ionicLoading.hide();
-      		$state.go('home');
+      		$state.go('client.checkout');
       		// $cookies.getObject('token');
       	},function(responseError){
                   $ionicLoading.hide();
