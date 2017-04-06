@@ -8,7 +8,7 @@ var appCtrl = angular.module('starter.controller', []);
 
 var appService = angular.module('starter.services', []);
 
-var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.services', 'angular-oauth2', 'ngResource'])
+var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.services', 'angular-oauth2', 'ngResource', 'ngCordova'])
 
 .constant('appConfig', {
   baseUrl:'http://localhost:8000'

@@ -1,6 +1,6 @@
 appCtrl.controller('ClientCheckoutCtrl', [
-	'$scope', '$state', '$cart', 'orderAPIService', '$ionicLoading', '$ionicPopup', 'cupomAPIService',
-		 function($scope, $state, $cart, orderAPIService, $ionicLoading, $ionicPopup, cupomAPIService){
+	'$scope', '$state', '$cart', 'orderAPIService', '$ionicLoading', '$ionicPopup', 'cupomAPIService', '$cordovaBarcodeScanner',
+		 function($scope, $state, $cart, orderAPIService, $ionicLoading, $ionicPopup, cupomAPIService, $cordovaBarcodeScanner){
 			 
 			
 			 var cart = $cart.get();
@@ -56,7 +56,17 @@ appCtrl.controller('ClientCheckoutCtrl', [
 		    };
 
 		    $scope.readBarCode = function(){
-		    	getValueCupom(7731);
+		    	$cordovaBarcodeScanner
+		    	.scan()
+		    	.then(function(barcodeData) {
+		    		getValueCupom(barcodeData.text);
+			    }, function(error) {
+			        $ionicPopup.alert({
+		    			title: 'Advertência',
+		    			template: 'Não foi possível ler o código de barras.'
+		    		});
+			    });
+
 		    };
 
 		    $scope.removeCupom = function(){
