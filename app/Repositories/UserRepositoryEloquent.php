@@ -2,11 +2,12 @@
 
 namespace Delivery\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Delivery\Repositories\UserRepository;
 use Delivery\Models\User;
+use Delivery\Presenters\UserPresenter;
+use Delivery\Repositories\UserRepository;
 use Delivery\Validators\UserValidator;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class UserRepositoryEloquent
@@ -14,6 +15,7 @@ use Delivery\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
@@ -36,5 +38,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return UserPresenter::class;
     }
 }

@@ -1,7 +1,12 @@
 appCtrl.controller('ClientCheckoutCtrl', [
-	'$scope', '$state', '$cart', 'orderAPIService', '$ionicLoading', '$ionicPopup', 'cupomAPIService', '$cordovaBarcodeScanner',
-		 function($scope, $state, $cart, orderAPIService, $ionicLoading, $ionicPopup, cupomAPIService, $cordovaBarcodeScanner){
+	'$scope', '$state', '$cart', 'orderAPIService', '$ionicLoading', '$ionicPopup', 'cupomAPIService', '$cordovaBarcodeScanner', 'userAPIService',
+		 function($scope, $state, $cart, orderAPIService, $ionicLoading, $ionicPopup, cupomAPIService, $cordovaBarcodeScanner, userAPIService){
 			 
+			 userAPIService.authenticated({include:'client'},function(data){
+			 	console.log(data.data);
+			 },function(responseError){
+
+			 });
 			
 			 var cart = $cart.get();
 

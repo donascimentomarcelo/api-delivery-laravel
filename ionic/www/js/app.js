@@ -49,6 +49,56 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
   });
 
   $stateProvider
+  .state('menu',{
+    url: '/menu',
+    templateUrl:'templates/menu.html',
+    controller: function($scope, $ionicSideMenuDelegate){
+      $scope.openLeft = function(){
+        $ionicSideMenuDelegate.toggleLeft()
+      }
+      $scope.openRight = function(){
+        $ionicSideMenuDelegate.toggleRight()
+      }
+    }
+  }).state('menu.a',{
+    url: '/a',
+    template:'<ion-view>'+
+    '<ion-content class="has-header">'+
+    '<h1>A</h1>'+
+    '<a ui-sref="menu.b">B</a><br/>'+
+    '<a ui-sref="menu.c">C</a>'+
+    '</ion-content>'+
+    '</ion-view>',
+    controller: function($scope){
+
+    }
+  })
+  .state('menu.b',{
+    url: '/b',
+    template:'<ion-view>'+
+    '<ion-content class="has-header">'+
+    '<h1>C</h1>'+
+    '<a ui-sref="menu.a">A</a><br/>'+
+    '<a ui-sref="menu.c">C</a>'+
+    '</ion-content>'+
+    '</ion-view>',
+    controller: function($scope){
+      
+    }
+  })
+  .state('menu.c',{
+    url: '/c',
+    template:'<ion-view>'+
+    '<ion-content class="has-header">'+
+    '<h1>C</h1>'+
+    '<a ui-sref="menu.b">B</a><br/>'+
+    '<a ui-sref="menu.a">A</a>'+
+    '</ion-content>'+
+    '</ion-view>',
+    controller: function($scope){
+      
+    }
+  })
   .state('login',{
     url: '/login',
     templateUrl:'templates/login.html',
