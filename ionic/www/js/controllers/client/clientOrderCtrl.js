@@ -20,7 +20,11 @@ appCtrl.controller('ClientOrderCtrl', [
 		 		},function(dataError){
 		 			$scope.$broadcast('scroll.refreshComplete');
 		 		});
-		 	}
+		 	};
+
+		 	$scope.openOrderDetail = function(order){
+		 		$state.go('client.view_order',{id: order.id});
+		 	};
 
 		 	function getOrders()
 		 	{

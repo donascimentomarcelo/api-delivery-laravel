@@ -78,6 +78,11 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
     templateUrl:'templates/client/order.html',
     controller:'ClientOrderCtrl'
   })
+  .state('client.view_order',{
+    url: '/view_order/:id',
+    templateUrl:'templates/client/view_order.html',
+    controller:'ClientViewOrderCtrl'
+  })
   .state('client.checkout_item_detail',{
     url: '/checkout/detail/:index',
     templateUrl:'templates/client/checkout_item_detail.html',

@@ -2,8 +2,9 @@
 
 namespace Delivery\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use Delivery\Models\OrderItem;
+use Delivery\Transformers\ProductTransformer;
+use League\Fractal\TransformerAbstract;
 
 /**
  * Class OrderItemsTransformer
@@ -11,6 +12,7 @@ use Delivery\Models\OrderItem;
  */
 class OrderItemTransformer extends TransformerAbstract
 {
+    protected $defaultIncludes = ['product'];
 
     /**
      * Transform the \OrderItems entity
@@ -23,11 +25,15 @@ class OrderItemTransformer extends TransformerAbstract
         return [
             'id'         => (int) $model->id,
             'product_id' => (int) $model->product_id,
-
-            /* place your other model properties here */
-
+            'qtd'        => (int) $model->qtd,
+            'price'      => (float) $model->price,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];
+    }
+
+    public function includeProduct(OrderItem $model)
+    {
+        return $this->item($model->product, new ProductTransformer());
     }
 }
