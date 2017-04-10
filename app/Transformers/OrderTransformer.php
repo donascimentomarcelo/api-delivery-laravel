@@ -2,8 +2,9 @@
 
 namespace Delivery\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use Delivery\Models\Order;
+use Illuminate\Database\Eloquent\Collection;
+use League\Fractal\TransformerAbstract;
 
 /**
  * Class OrderTransformer
@@ -22,11 +23,21 @@ class OrderTransformer extends TransformerAbstract
     public function transform(Order $model)
     {
         return [
-            'id'         => (int)   $model->id,
-            'total'      => (float) $model->total,
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'id'           => (int)   $model->id,
+            'total'        => (float) $model->total,
+            'product_names'=> $this->getArrayProductNames($model->items),
+            'created_at'   => $model->created_at,
+            'updated_at'   => $model->updated_at
         ];
+    }
+
+    protected function getArrayProductNames(Collection $items)
+    {
+        $names = [];
+        foreach ($items as $item) {
+            $names[] = $item->product->name;
+        }
+        return $names;
     }
 
     /* includeCupom é responsável pesa serialização do relacionamento das ordens e includeItems pelo relacionamento dos items*/

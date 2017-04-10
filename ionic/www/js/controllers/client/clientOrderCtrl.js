@@ -12,11 +12,32 @@ appCtrl.controller('ClientOrderCtrl', [
 			    showDelay: 0
 		 	});
 		 	
-		 	orderAPIService.query({id: null}, function(data){
+		 	$scope.doRefresh = function(){
+		 		getOrders().then(function(data){
+		 			$scope.items = data.data;
+		 			$scope.$broadcast('scroll.refreshComplete');
+		 			// $broadcast sinal de chamada de evento
+		 		},function(dataError){
+		 			$scope.$broadcast('scroll.refreshComplete');
+		 		});
+		 	}
+
+		 	function getOrders()
+		 	{
+			 	return orderAPIService.query({
+			 		id: null,
+			 		orderBy: 'created_at',
+			 		sortedBy: 'desc'
+			 	}).$promise;
+		 	};
+
+		 	getOrders().then(function(data){
 		 		$scope.items = data.data;
 		 		$ionicLoading.hide();
 		 	},function(dataError){
 		 		$ionicLoading.hide();
 		 	});
-    
+
 }]);
+
+

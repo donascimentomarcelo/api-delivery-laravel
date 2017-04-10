@@ -11,6 +11,6 @@ appCtrl.controller('ClientCheckoutSuccessfulCtrl', [
 			 $cart.clear();
 
 			 $scope.openListOrder = function(){
-			 	
+			 	$state.go('client.order');
 			 };
 }]);

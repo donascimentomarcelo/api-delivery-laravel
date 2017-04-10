@@ -8,7 +8,9 @@ var appCtrl = angular.module('starter.controller', []);
 
 var appService = angular.module('starter.services', []);
 
-var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.services', 'angular-oauth2', 'ngResource', 'ngCordova'])
+var appFilter = angular.module('starter.filters', []);
+// smp que criar uma dependencia, n esquecer de importar no modulo principal
+var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.services', 'starter.filters', 'angular-oauth2', 'ngResource', 'ngCordova'])
 
 .constant('appConfig', {
   baseUrl:'http://localhost:8000'

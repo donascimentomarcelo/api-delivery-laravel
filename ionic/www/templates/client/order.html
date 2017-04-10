@@ -1,13 +1,19 @@
 <ion-view>
 <ion-nav-bar class="bar bar-positive"></ion-nav-bar>
 	<ion-nav-title>Meus Pedidos</ion-nav-title>
-	
 	<ion-content class="padding has-header">
+	<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
 			<ion-item ng-repeat="o in items">
 				<div class="row">
-					<div class="col">test {{$index}}</div>
-					<div class="col">test {{$index}}</div>
+					<div class="col">
+						<h2>{{o.created_at.date|limitTo: 10| date: 'dd/MM/yyyy'}}</h2>
+						<p>{{o.product_names | limitTo: 2 | filterJoin: ', ' }}</p>
+						<i class="ion ion-ios-cart"> {{o.product_names.length}} Itens</i>
+					</div>
+					<div class="col text-right">
+						<i > <b>R$</b> {{o.total}}</i>
+					</div>
 				</div>
 			</ion-item>
 		</ion-list>
