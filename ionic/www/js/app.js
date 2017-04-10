@@ -99,6 +99,23 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
     templateUrl:'templates/client/view_products.html',
     controller:'ClientViewProductCtrl'
   })
+  .state('deliveryman',{
+    abstract: true,
+    url: '/deliveryman',
+    templateUrl:'templates/deliveryman/menu.html',
+    controller:'DeliverymanMenuCtrl'
+  })
+  .state('deliveryman.order',{
+    url: '/order',
+    templateUrl:'templates/deliveryman/order.html',
+    controller:'DeliverymanOrderCtrl'
+  })
+  .state('deliveryman.view_order',{
+    cache: false,
+    url: '/view_order/:id',
+    templateUrl:'templates/deliveryman/view_order.html',
+    controller:'DeliverymanViewOrderCtrl'
+  })
 
   $urlRouterProvider.otherwise('/login');
 
