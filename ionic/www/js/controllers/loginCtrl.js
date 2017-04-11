@@ -1,6 +1,6 @@
 appCtrl.controller('LoginCtrl', [
-	'$scope', 'OAuth', '$cookies', '$ionicPopup', '$state', '$ionicLoading',
-		 function($scope, OAuth, $cookies, $ionicPopup, $state, $ionicLoading){
+	'$scope', 'OAuth', 'OAuthToken','$cookies', '$ionicPopup', '$state', '$ionicLoading', '$localStorage', 'userAPIService',
+		 function($scope, OAuth, OAuthToken, $cookies, $ionicPopup, $state, $ionicLoading, $localStorage, userAPIService){
 	
 	$scope.user = {
 		username:'',
@@ -8,25 +8,26 @@ appCtrl.controller('LoginCtrl', [
 	};
 
       $scope.login = function(){
-            $ionicLoading.show({
-                  content: 'Loading',
-                  animation: 'fade-in',
-                  showBackdrop: true,
-                  maxWidth: 200,
-                  showDelay: 0
-                  });
-      	OAuth.getAccessToken($scope.user).then(function(data){
+            $ionicLoading.show({ content: 'Loading',  animation: 'fade-in', showBackdrop: true, maxWidth: 200, showDelay: 0});
+
+      	var promise = OAuth.getAccessToken($scope.user);
+                promise.then(function(data){
                   $ionicLoading.hide();
-      		$state.go('client.checkout');
+      		return userAPIService.authenticated({include: 'client'}).$promise;
       		// $cookies.getObject('token');
-      	},function(responseError){
+      	}).then(function(data){
+                  $localStorage.set('user', data.data);
+                  $state.go('client.checkout');
+            }, function(responseError){
                   $ionicLoading.hide();
-      		$ionicPopup.alert({
-      			title:'Advertência',
-      			template:'Login e/ou senha inválidos'
-      		});
-      		console.debug(responseError);
-      	});
+                  $localStorage.set('user', null);
+                  OAuthToken.removeToken();
+                  $ionicPopup.alert({
+                        title:'Advertência',
+                        template:'Login e/ou senha inválidos'
+                  });
+                  console.debug(responseError);
+            });
       };
     
 }]);
