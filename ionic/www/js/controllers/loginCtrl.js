@@ -1,6 +1,6 @@
 appCtrl.controller('LoginCtrl', [
-	'$scope', 'OAuth', 'OAuthToken','$cookies', '$ionicPopup', '$state', '$ionicLoading', '$localStorage', 'userAPIService',
-		 function($scope, OAuth, OAuthToken, $cookies, $ionicPopup, $state, $ionicLoading, $localStorage, userAPIService){
+	'$scope', 'OAuth', 'OAuthToken','$cookies', '$ionicPopup', '$state', '$ionicLoading', 'userDataAPIService', 'userAPIService',
+		 function($scope, OAuth, OAuthToken, $cookies, $ionicPopup, $state, $ionicLoading, userDataAPIService, userAPIService){
 	
 	$scope.user = {
 		username:'',
@@ -16,11 +16,11 @@ appCtrl.controller('LoginCtrl', [
       		return userAPIService.authenticated({include: 'client'}).$promise;
       		// $cookies.getObject('token');
       	}).then(function(data){
-                  $localStorage.set('user', data.data);
+                  userDataAPIService.set(data.data);
                   $state.go('client.checkout');
             }, function(responseError){
                   $ionicLoading.hide();
-                  $localStorage.set('user', null);
+                  userDataAPIService.set(null);
                   OAuthToken.removeToken();
                   $ionicPopup.alert({
                         title:'Advertência',
