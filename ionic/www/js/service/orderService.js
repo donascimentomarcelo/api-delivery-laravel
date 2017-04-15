@@ -8,4 +8,15 @@ appService.factory('orderAPIService',
 			 		}
 			 	});
 
+}])
+.factory('orderDeliverymanAPIService',
+	 ['$resource', 'appConfig',
+		function ($resource, appConfig) {
+
+		return	$resource(appConfig.baseUrl+'/api/deliveryman/order/:id',{id: '@id'},{
+			 		query:{
+			 			isArray:false
+			 		}
+			 	});
+
 }]);

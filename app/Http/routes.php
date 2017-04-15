@@ -75,6 +75,7 @@ Route::group(['middleware'=>'cors'],function(){
 			Route::patch('order/{id}/update-status',[
 				'uses'=>'Api\Deliveryman\DeliverymanCheckoutController@updateStatus',
 				'as'=>'orders.update_status']);
+			Route::post('order/{id}/geo',['as' => 'orders.geo', 'uses' => 'Api\Deliveryman\DeliverymanCheckoutController@geo']);
 
 		});
 		Route::get('authenticated','Api\UserController@authenticated');	

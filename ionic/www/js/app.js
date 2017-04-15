@@ -102,9 +102,10 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
   .state('deliveryman',{
     abstract: true,
     url: '/deliveryman',
-    templateUrl:'templates/deliveryman/menu.html',
+    templateUrl:'templates/deliveryman/menuDeliveryman.html',
     controller:'DeliverymanMenuCtrl'
   })
+  
   .state('deliveryman.order',{
     url: '/order',
     templateUrl:'templates/deliveryman/order.html',
