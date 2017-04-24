@@ -25,7 +25,6 @@ class GetLocationDeliveryman extends Event implements ShouldBroadcast
      */
     public function __construct(Geo $geo, Order $order)
     {
-        //
         $this->geo = $geo;
         $this->order = $order;
     }
