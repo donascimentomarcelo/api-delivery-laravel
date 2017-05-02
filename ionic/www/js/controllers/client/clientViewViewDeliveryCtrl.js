@@ -6,7 +6,7 @@ appCtrl.controller('ClientViewViewDeliveryCtrl', [
 		 	$scope.map = {
 		 		center:{
 		 			latitude: -23.444,
-		 			longitude: -43.444
+		 			longitude: -46.444
 		 		},
 		 		zoom: 12
 		 	}
@@ -17,6 +17,20 @@ appCtrl.controller('ClientViewViewDeliveryCtrl', [
 			    maxWidth: 200,
 			    showDelay: 0
 		 	});
+
+		 	$scope.markers = [
+		 		{
+		 			id: 1,
+		 			coords: {
+		 				latitude: -23.444,
+		 				longitude: -46.444
+		 			},
+		 			options:{
+		 				title:'Meu titulo',
+		 				labelContent: 'Meu marcador'
+		 			}
+		 		}
+		 	]
 		 	
 		 	orderAPIService.get({id: $stateParams.id, include: "items, cupom"}, function(data){
 		 		$scope.order = data.data;

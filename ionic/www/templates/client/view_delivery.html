@@ -22,7 +22,13 @@
 			</ion-item>
 		</ion-list>
 		<ui-gmap-google-map center="map.center" zoom="map.zoom">
-			
+			<ui-gmap-marker 
+			idkey="o.id"
+			options="o.options"
+			coords="o.coords"
+			ng-repeat="o in markers"> 
+				
+			</ui-gmap-marker>
 		</ui-gmap-google-map>
 	</ion-content>
 </ion-view>
