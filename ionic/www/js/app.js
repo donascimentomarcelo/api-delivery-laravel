@@ -10,7 +10,10 @@ var appService = angular.module('starter.services', []);
 
 var appFilter = angular.module('starter.filters', []);
 // smp que criar uma dependencia, n esquecer de importar no modulo principal
-var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.services', 'starter.filters', 'angular-oauth2', 'ngResource', 'ngCordova'])
+var app = angular.module('starter', [
+  'ionic', 'starter.controller', 'starter.services', 'starter.filters', 
+  'angular-oauth2', 'ngResource', 'ngCordova','uiGmapgoogle-maps'
+  ])
 
 .constant('appConfig', {
   baseUrl:'http://localhost:8000'
@@ -82,6 +85,12 @@ var app = angular.module('starter', ['ionic', 'starter.controller', 'starter.ser
     url: '/view_order/:id',
     templateUrl:'templates/client/view_order.html',
     controller:'ClientViewOrderCtrl'
+  })
+  .state('client.view_delivery',{
+    cache: false,
+    url: '/view_delivery/:id',
+    templateUrl:'templates/client/view_delivery.html',
+    controller:'ClientViewViewDeliveryCtrl'
   })
   .state('client.checkout_item_detail',{
     url: '/checkout/detail/:index',

@@ -33,6 +33,10 @@
     <!--  Ao instalar o angular-resource, se der erro, bower install angular-resource#1.5.3 --save -->
 
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="lib/lodash/dist/lodash.js"></script>
+    <script src="lib/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
+   
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -46,6 +50,7 @@
     <script src="js/controllers/client/clientMenuCtrl.js"></script>
     <script src="js/controllers/client/clientOrderCtrl.js"></script>
     <script src="js/controllers/client/clientViewOrderCtrl.js"></script>
+    <script src="js/controllers/client/clientViewViewDeliveryCtrl.js"></script>
     <script src="js/controllers/deliveryman/deliverymanMenuCtrl.js"></script>
     <script src="js/controllers/deliveryman/deliverymanOrderCtrl.js"></script>
     <script src="js/controllers/deliveryman/deliverymanViewOrderCtrl.js"></script>
@@ -62,5 +67,6 @@
   </head>
   <body ng-app="starter">
     <ion-nav-view></ion-nav-view>
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
   </body>
 </html>

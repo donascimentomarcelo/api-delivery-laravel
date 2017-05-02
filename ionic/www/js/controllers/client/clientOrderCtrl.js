@@ -1,6 +1,6 @@
 appCtrl.controller('ClientOrderCtrl', [
-	'$scope', '$state', '$ionicLoading', 'orderAPIService', 
-		 function($scope, $state, $ionicLoading, orderAPIService){
+	'$scope', '$state', '$ionicLoading', 'orderAPIService', '$ionicActionSheet', 
+		 function($scope, $state, $ionicLoading, orderAPIService, $ionicActionSheet){
 		 	
 		 	$scope.items = [];
 
@@ -25,6 +25,30 @@ appCtrl.controller('ClientOrderCtrl', [
 		 	$scope.openOrderDetail = function(order){
 		 		$state.go('client.view_order',{id: order.id});
 		 	};
+
+		 	$scope.showActionSheet = function(order){
+		 		$ionicActionSheet.show({
+		 			buttons:[
+		 				{text: 'Ver Detalhes'}, 
+		 				{text: 'Ver Entrega'}
+		 			],
+		 			titleText: 'O que fazer?',
+		 			cancelText: 'Cancelar',
+		 			cancel: function(){
+
+		 			},
+		 			buttonClicked: function(index){
+		 				switch(index){
+		 					case 0:
+		 						$state.go('client.view_order', {id: order.id});
+		 						break;
+		 					case 1:
+		 						$state.go('client.view_delivery', {id: order.id});
+		 						break;
+		 				}
+		 			}
+		 		})
+		 	}
 
 		 	function getOrders()
 		 	{
