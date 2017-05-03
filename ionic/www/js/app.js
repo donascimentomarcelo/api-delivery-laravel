@@ -12,13 +12,16 @@ var appFilter = angular.module('starter.filters', []);
 // smp que criar uma dependencia, n esquecer de importar no modulo principal
 var app = angular.module('starter', [
   'ionic', 'starter.controller', 'starter.services', 'starter.filters', 
-  'angular-oauth2', 'ngResource', 'ngCordova','uiGmapgoogle-maps'
+  'angular-oauth2', 'ngResource', 'ngCordova','uiGmapgoogle-maps',
+  'pusher-angular'
   ])
 
 .constant('appConfig', {
-  baseUrl:'http://localhost:8000'
+  baseUrl:'http://localhost:8000',
+  pusherKey: 'afe62afba699f9398ded'
 })
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $window, appConfig) {
+  $window.client = new Pusher(appConfig.pusherKey);
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
