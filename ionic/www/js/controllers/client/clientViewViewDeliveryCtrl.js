@@ -5,8 +5,8 @@ appCtrl.controller('ClientViewViewDeliveryCtrl', [
 		 	$scope.order = {};
 		 	$scope.map = {
 		 		center:{
-		 			latitude: -23.444,
-		 			longitude: -46.444
+		 			latitude: 0,
+		 			longitude: 0
 		 		},
 		 		zoom: 12
 		 	}
@@ -38,8 +38,17 @@ appCtrl.controller('ClientViewViewDeliveryCtrl', [
 		 		$ionicLoading.hide();
 		 	});
 
+		 	$scope.$watch('markers.length', function(value){
+		 		// $watch assiste a mudança de valor de alguma variavel
+		 		// nesse caso é da variavel markers
+		 		if(value == 2)
+		 		{
+		 			createBounds();
+		 		}
+		 	});
+
 		 	function initMarkers(order){
-		 		var client  = userDataAPIService.get().client,
+		 		var client  = userDataAPIService.get().client.data,
 		 		// var client  = userDataAPIService.get().client.data,
 		 			address = client.zipcode + ', ' 
 		 					+ client.address + ', '
@@ -87,9 +96,53 @@ appCtrl.controller('ClientViewViewDeliveryCtrl', [
 		 			channel = pusher.subscribe(channel);
 
 		 		channel.bind('Delivery\\Events\\GetLocationDeliveryman', function(data){
-		 			console.log(data)
+		 			var lat = data.geo.lat, long = data.geo.long;
+
+		 			if($scope.markers.length == 1 || $scope.markers.length == 0)
+		 			{
+		 				$scope.markers.push({
+		 					id: 'entregador', 
+		 					coords: {
+		 						latitude: lat,
+		 						longitude: long
+		 					},
+		 					options:{
+		 						title: "Entregador",
+		 						icon: iconUrl + 'icon47.png'
+		 					}
+		 				});
+		 				return;
+		 			}
+		 			for(var key in $scope.markers)
+		 			{
+		 				if($scope.markers[key].id == 'entregador')
+		 				{
+		 					$scope.markers[key].coords = {
+		 						latitude:lat,
+		 						longitude:long
+		 					}
+		 				}
+		 			}
 		 		});
-		 	}
+		 	};
+
+		 	function createBounds(){
+		 		var bounds = new google.maps.LatLngBounds();
+		 		angular.forEach($scope.markers, function(value){
+		 			latlng = new google.maps.LatLng(Number(value.coords.latitude), Number(value.coords.longitude));
+		 			bounds.extend(latlng);
+		 		});
+			 	$scope.map.bounds = {
+			 		northeast:{
+			 			latitude: bounds.getNorthEast().lat(),
+			 			longitude: bounds.getNorthEast().lng()
+			 		},
+			 		southwest:{
+			 			latitude: bounds.getSouthWest().lat(),
+			 			longitude: bounds.getSouthWest().lng()
+			 		}
+			 	}
+		 	};	
 		 	
 }]);
 
