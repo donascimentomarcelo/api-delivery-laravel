@@ -1,15 +1,10 @@
 appCtrl.controller('ClientViewViewDeliveryCtrl', [
-	'$scope', '$stateParams', '$ionicLoading', 'orderAPIService', '$ionicPopup', 'userDataAPIService', '$pusher', '$window',
-		 function($scope, $stateParams, $ionicLoading, orderAPIService, $ionicPopup, userDataAPIService, $pusher, $window){
+	'$scope', '$stateParams', '$ionicLoading', 'orderAPIService', '$ionicPopup', 'userDataAPIService', '$pusher', '$window', '$map', 'uiGmapGoogleMapApi',
+		 function($scope, $stateParams, $ionicLoading, orderAPIService, $ionicPopup, userDataAPIService, $pusher, $window, $map, uiGmapGoogleMapApi){
 		 	var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
 		 	$scope.order = {};
-		 	$scope.map = {
-		 		center:{
-		 			latitude: 0,
-		 			longitude: 0
-		 		},
-		 		zoom: 12
-		 	}
+		 	$scope.map = $map;
+
 		 	$ionicLoading.show({
 		 		content: 'Loading',
 			    animation: 'fade-in',
@@ -18,11 +13,16 @@ appCtrl.controller('ClientViewViewDeliveryCtrl', [
 			    showDelay: 0
 		 	});
 
+		 	uiGmapGoogleMapApi.then(function(maps){
+		 		$ionicLoading.hide();
+		 	}, function(){
+		 		$ionicLoading.hide();
+		 	});
+
 		 	$scope.markers = []
 		 	
 		 	orderAPIService.get({id: $stateParams.id, include: "items, cupom"}, function(data){
 		 		$scope.order = data.data;
-		 		$ionicLoading.hide();
 		 		if(parseInt($scope.order.status, 10) == 1)
 		 		{
 		 			initMarkers($scope.order);
@@ -34,8 +34,6 @@ appCtrl.controller('ClientViewViewDeliveryCtrl', [
                         template:'Pedidos não está em status de entrega'
                   });
 		 		}
-		 	},function(dataError){
-		 		$ionicLoading.hide();
 		 	});
 
 		 	$scope.$watch('markers.length', function(value){
@@ -144,6 +142,19 @@ appCtrl.controller('ClientViewViewDeliveryCtrl', [
 			 	}
 		 	};	
 		 	
+}])
+.controller('CvdDescentralize',['$scope', '$map', function($scope, $map){
+	$scope.map = $map;
+	$scope.fit = function(){
+		$scope.map.fit = !$scope.map.fit;
+	};
+}])
+.controller('CvdReload',['$scope','$window' ,'$timeout', function($scope, $window, $timeout){
+	$scope.reload = function(){
+		$timeout(function() {
+			$window.location.reload(true);
+		}, 100);
+	};
 }]);
 
 
